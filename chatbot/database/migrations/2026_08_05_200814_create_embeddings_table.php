@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('embeddings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('documento_id')
+                  ->constrained('documentos')
+                  ->cascadeOnDelete();
+            $table->text('chunk');
+            $table->json('embedding');
             $table->timestamps();
         });
     }

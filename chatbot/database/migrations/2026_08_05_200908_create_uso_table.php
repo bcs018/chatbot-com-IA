@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('uso', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('empresa_id')
+                  ->constrained('empresas')
+                  ->cascadeOnDelete();
+            $table->integer('tokens_usados');
+            $table->date('data');
             $table->timestamps();
         });
     }

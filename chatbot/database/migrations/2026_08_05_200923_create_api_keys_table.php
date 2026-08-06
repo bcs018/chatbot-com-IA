@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('api_keys', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('empresa_id')
+                  ->constrained('empresas')
+                  ->cascadeOnDelete();
+            $table->string('api_key')->unique();
             $table->timestamps();
         });
     }

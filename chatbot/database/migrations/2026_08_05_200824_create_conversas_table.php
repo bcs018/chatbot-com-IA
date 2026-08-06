@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('conversas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('bot_id')
+                  ->constrained('bots')
+                  ->cascadeOnDelete();
+            $table->string('session_id');
             $table->timestamps();
         });
     }

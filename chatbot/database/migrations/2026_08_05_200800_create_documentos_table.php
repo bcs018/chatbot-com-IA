@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('documentos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('bot_id')
+                  ->constrained('bots')
+                  ->cascadeOnDelete();
+            $table->string('titulo')->nullable();
+            $table->longText('conteudo');
             $table->timestamps();
         });
     }
