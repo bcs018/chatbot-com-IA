@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empresa;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class EmpresaController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +22,9 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        return view('admin/cadastrarEmpresa');
+        $empresas = Empresa::all();
+
+        return view('admin.cadastrarUsuario', compact('empresas'));
     }
 
     /**
@@ -28,14 +32,14 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        $empresa = new Empresa();
-        $empresa->nome = $request->nome;
-        $empresa->email = $request->email;
-        $empresa->senha = '';
-        $empresa->plano = '';
-        $empresa->save();
+        $user = new User();
+        $user->name = $request->name;
+        $user->password = Hash::make($request->password);
+        $user->email = $request->email;
+        $user->empresa_id = $request->empresa;
+        $user->save();
 
-        return redirect()->route('empresa.create')->with('success', 'Empresa adicionada com sucesso');
+        return redirect()->route('usuario.create')->with('success', 'Usuário cadastrado com sucesso');
     }
 
     /**

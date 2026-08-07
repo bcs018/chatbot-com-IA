@@ -1,0 +1,14 @@
+.bg-main-color
+{
+    background-color: #a83ce2;
+}
+
+.bg-main-buttom
+{
+    background-color: #bc71e4;
+}
+
+.bg-main-buttom:hover
+{
+    background-color: #d4b3e7;
+}
