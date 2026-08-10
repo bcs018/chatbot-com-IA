@@ -26,6 +26,16 @@
                     @endforeach
                 </select>
             </div>
+            @if (Auth::user()->admin)
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault" name="admin">
+                        <label class="form-check-label" for="checkDefault">
+                            Administrador
+                        </label>
+                    </div>
+                </div>
+            @endif
             <button type="submit" class="btn bg-main-buttom">Cadastrar</button>
         </form>
 

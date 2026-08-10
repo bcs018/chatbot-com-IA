@@ -2,30 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Empresa;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        if (Auth::check())
+            return to_route('empresa.create');
+
+        return view('login.index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function login(Request $request)
     {
-        $empresas = Empresa::all();
+        if (!Auth::attempt(['email'=>$request->email, 'password'=>$request->password]))
+        {
+            return redirect()->back()->with('error', 'Usuário ou senha inválido')->withInput();
+        }
 
-        return view('admin.cadastrarUsuario', compact('empresas'));
+        return redirect()->route('empresa.create');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        return to_route('login');
     }
 
     /**
@@ -33,21 +43,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->password = Hash::make($request->password);
-        $user->email = $request->email;
-        $user->empresa_id = $request->empresa;
-
-        if (Auth::user()->admin)
-        {
-            if ($request->has('admin'))
-                $user->admin = 1;
-        }
-
-        $user->save();
-
-        return redirect()->route('usuario.create')->with('success', 'Usuário cadastrado com sucesso');
+        //
     }
 
     /**

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 </head>
 
 <body>
@@ -22,11 +21,19 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('empresa.create')}}">Empresas</a>
-                    </li>
+                    @if (Auth::user()->admin)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('empresa.create')}}">Empresas</a>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('usuario.create')}}">Usuários</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{{route('logout')}}" method="POST">
+                            @csrf
+                            <button type="submit" class="nav-link">Sair</button>
+                        </form>
                     </li>
                 </ul>
             </div>
