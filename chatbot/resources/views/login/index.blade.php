@@ -10,7 +10,7 @@
 
 </head>
 
-<body>
+<body class="bg-color">
     <div class="d-flex justify-content-center align-items-center vh-100 p-3">
         <div class="p-4 " style="width: 350px;">
             <div class="text-center mb-4">

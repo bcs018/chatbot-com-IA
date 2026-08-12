@@ -1,14 +1,29 @@
+body 
+{
+    color: #ffffff;
+}
+
 .bg-main-color
 {
-    background-color: #a83ce2;
+    background-color: #ff6b00;
 }
 
 .bg-main-buttom
 {
-    background-color: #bc71e4;
+    background-color:#ff6b00;
 }
 
 .bg-main-buttom:hover
 {
-    background-color: #d4b3e7;
+    background-color: #f79b61;
+}
+
+.bg-color 
+{
+    background-color: #292828;
+}
+
+.cards 
+{
+    background-color: #1f1f1f;
 }

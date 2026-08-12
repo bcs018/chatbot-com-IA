@@ -18,6 +18,12 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
+    }
+
     protected $fillable = [
         'name',
         'email',
