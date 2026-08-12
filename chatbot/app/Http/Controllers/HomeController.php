@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EmpresaRequest;
-use App\Models\Empresa;
 use Illuminate\Http\Request;
 
-class EmpresaController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('home.index');
     }
 
     /**
@@ -21,22 +19,15 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        return view('painel/cadastrarEmpresa');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(EmpresaRequest $request)
+    public function store(Request $request)
     {
-        $empresa = new Empresa();
-        $empresa->nome = $request->nome;
-        $empresa->email = $request->email;
-        $empresa->senha = '';
-        $empresa->plano = '';
-        $empresa->save();
-
-        return redirect()->route('empresa.create')->with('success', 'Empresa adicionada com sucesso');
+        //
     }
 
     /**

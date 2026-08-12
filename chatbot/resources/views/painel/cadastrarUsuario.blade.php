@@ -20,15 +20,15 @@
                     <label for="password" class="form-label">Senha</label>
                     <input type="password" class="form-control" id="password" aria-describedby="password" name="password">
                 </div>
-                <div class="mb-3">
-                    <label for="empresa" class="form-label">Empresa</label>
-                    <select class="form-select" aria-label="Default select example" id="empresa" name="empresa">
-                        @foreach ($empresas as $empresa)
-                            <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
-                        @endforeach
-                    </select>
-                </div>
                 @if (Auth::user()->admin)
+                    <div class="mb-3">
+                        <label for="empresa" class="form-label">Empresa</label>
+                        <select class="form-select" aria-label="Default select example" id="empresa" name="empresa">
+                            @foreach ($empresas as $empresa)
+                                <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="checkDefault" name="admin">
@@ -46,9 +46,13 @@
                 </div>
             @endif
     
-             @if (session('error'))
-                <div class="mt-3 alert alert-error">
-                    {{ session('error') }}
+            @if ($errors->any())
+                <div class="mt-3 alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
                 </div>
             @endif
         </div>

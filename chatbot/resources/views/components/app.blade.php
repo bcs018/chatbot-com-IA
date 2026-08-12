@@ -34,7 +34,7 @@
                     </li>
                 </ul>
                 
-                <span class="navbar-text me-3 fw-medium">
+                <span class="navbar-text me-4 fw-medium">
                     {{Auth::user()->name}}
                 </span>
 

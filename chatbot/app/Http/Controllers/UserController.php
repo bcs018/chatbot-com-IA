@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsuarioRequest;
 use App\Models\Empresa;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,24 +26,39 @@ class UserController extends Controller
     {
         $empresas = Empresa::all();
 
-        return view('admin.cadastrarUsuario', compact('empresas'));
+        return view('painel.cadastrarUsuario', compact('empresas'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UsuarioRequest $request)
     {
         $user = new User();
         $user->name = $request->name;
         $user->password = Hash::make($request->password);
         $user->email = $request->email;
-        $user->empresa_id = $request->empresa;
 
         if (Auth::user()->admin)
         {
+            /**
+             * Se for adm pega a empresa do campo select da view
+             */
+            $user->empresa_id = $request->empresa;
+
+            /**
+             * Se for adm verifica se existe o campo admin na requisisao
+             * Se sim é porque esta selecionado como adm, senão default fica false
+             */
             if ($request->has('admin'))
                 $user->admin = 1;
+        }
+        else 
+        {
+            /**
+             * Senão pega a empresa do usuario
+             */
+            $user->empresa_id = Auth::user()->empresa_id;
         }
 
         $user->save();
