@@ -41,6 +41,11 @@ footer {
 }
 /* /Home */
 
+.text-color-orange {
+    color: #ff6b00;
+    text-decoration: none;
+}
+
 .bg-main-color
 {
     background-color: #ff6b00;

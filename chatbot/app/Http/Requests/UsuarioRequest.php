@@ -24,9 +24,10 @@ class UsuarioRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'empresa'  => ['required'],
             'name'     => ['required'],
-            'email'    => ['required', 'email'],
-            'password' => ['required', 'min:8'],
+            'email'    => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'min:8', 'confirmed'],
         ];
     }
 
@@ -34,11 +35,14 @@ class UsuarioRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required'     => 'Campo Nome é obrigatório',
-            'email.required'    => 'Campo E-mail é obrigatório',
-            'email.email'       => 'Campo E-mail deve conter um e-mail válido',
-            'password.required' => 'Campo Senha é obrigatório',
-            'password.min'      => 'Campo Senha deve conter no mínimo :min caracteres'
+            'empresa.required'   => 'Campo Empresa é obrigatório',
+            'name.required'      => 'Campo Nome é obrigatório',
+            'email.required'     => 'Campo E-mail é obrigatório',
+            'email.email'        => 'Campo E-mail deve conter um e-mail válido',
+            'email.unique'       => 'Este e-mail já foi usado, informe outro',
+            'password.required'  => 'Campo Senha é obrigatório',
+            'password.min'       => 'Campo Senha deve conter no mínimo :min caracteres',
+            'password.confirmed' => 'Campo Senha e Confirmar Senha não batem',
         ];
     }
 }

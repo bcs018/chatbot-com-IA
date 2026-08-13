@@ -8,9 +8,15 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Repositories\UserRepositoryInterface;
+use App\Repositories\UserRepository;
 
 class UserController extends Controller
 {
+    public function __construct(private UserRepositoryInterface $repository) 
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -34,36 +40,40 @@ class UserController extends Controller
      */
     public function store(UsuarioRequest $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->password = Hash::make($request->password);
-        $user->email = $request->email;
+        // $user = new User();
+        // $user->name = $request->name;
+        // $user->password = Hash::make($request->password);
+        // $user->email = $request->email;
 
-        if (Auth::user()->admin)
-        {
-            /**
-             * Se for adm pega a empresa do campo select da view
-             */
-            $user->empresa_id = $request->empresa;
+        // if (Auth::user()->admin)
+        // {
+        //     /**
+        //      * Se for adm pega a empresa do campo select da view
+        //      */
+        //     $user->empresa_id = $request->empresa;
 
-            /**
-             * Se for adm verifica se existe o campo admin na requisisao
-             * Se sim é porque esta selecionado como adm, senão default fica false
-             */
-            if ($request->has('admin'))
-                $user->admin = 1;
-        }
-        else 
-        {
-            /**
-             * Senão pega a empresa do usuario
-             */
-            $user->empresa_id = Auth::user()->empresa_id;
-        }
+        //     /**
+        //      * Se for adm verifica se existe o campo admin na requisisao
+        //      * Se sim é porque esta selecionado como adm, senão default fica false
+        //      */
+        //     if ($request->has('admin'))
+        //         $user->admin = 1;
+        // }
+        // else 
+        // {
+        //     /**
+        //      * Senão pega a empresa do usuario
+        //      */
+        //     $user->empresa_id = Auth::user()->empresa_id;
+        // }
 
-        $user->save();
+        // $user->save();
 
-        return redirect()->route('usuario.create')->with('success', 'Usuário cadastrado com sucesso');
+        
+        $this->repository->add($request);
+
+
+        return redirect()->back()->with('success', 'Usuário cadastrado com sucesso');
     }
 
     /**

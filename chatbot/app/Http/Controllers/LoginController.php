@@ -28,7 +28,7 @@ class LoginController extends Controller
             return redirect()->back()->with('error', 'Usuário ou senha inválido')->withInput();
         }
 
-        return redirect()->route('empresa.create');
+        return redirect()->route('usuario.create');
     }
 
     public function logout(Request $request)

@@ -1,37 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat IA SaaS</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
-
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Inteli Chat</a>
-
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="menu">
-                <ul class="navbar-nav ms-auto text-center">
-                    <li class="nav-item"><a class="nav-link" href="#">Início</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Recursos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Preço</a></li>
-                    <li class="nav-item">
-                        <a class="btn btn-main ms-lg-3 mt-2 mt-lg-0" href="#">Começar</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+<x-home title="Home">
+    
     <!-- HERO -->
     <section class="hero">
         <div class="container">
@@ -43,7 +11,7 @@
             </p>
 
             <div class="mt-4">
-                <a href="#" class="btn btn-main btn-lg">Começar Agora</a>
+                <a href="{{route('cadastrese')}}" class="btn btn-main btn-lg">Começar Agora</a>
             </div>
         </div>
     </section>
@@ -55,7 +23,7 @@
 
                 <div class="col-12 col-md-4">
                     <div class="card p-4 h-100">
-                        <h5>🤖 Inteligente</h5>
+                        <h5 class="text-light">🤖 Inteligente</h5>
                         <p class="text-secondary">
                             Responde clientes com base nas informações da sua empresa.
                         </p>
@@ -64,7 +32,7 @@
 
                 <div class="col-12 col-md-4">
                     <div class="card p-4 h-100">
-                        <h5>⚡ Rápido</h5>
+                        <h5 class="text-light">⚡ Rápido</h5>
                         <p class="text-secondary">
                             Respostas instantâneas 24 horas por dia.
                         </p>
@@ -73,7 +41,7 @@
 
                 <div class="col-12 col-md-4">
                     <div class="card p-4 h-100">
-                        <h5>💰 Aumenta vendas</h5>
+                        <h5 class="text-light">💰 Aumenta vendas</h5>
                         <p class="text-secondary">
                             Nunca perca um cliente por falta de resposta.
                         </p>
@@ -114,19 +82,8 @@
     <section class="section text-center">
         <div class="container">
             <h2>Pronto para automatizar seu atendimento?</h2>
-            <a href="#" class="btn btn-main btn-lg mt-3">Começar agora</a>
+            <a href="{{route('cadastrese')}}" class="btn btn-main btn-lg mt-3">Começar agora</a>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <p class="text-secondary mb-0">
-                © {{date('Y')}} Chat IA - Todos os direitos reservados
-            </p>
-        </div>
-    </footer>
-
-</body>
-
-</html>
+</x-home>

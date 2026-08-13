@@ -9,10 +9,10 @@
 </head>
 
 <body class="bg-color">
-    <nav class="navbar navbar-expand-lg bg-main-color">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="{{ asset('images/logo4.png') }}" alt="Logo" width="48" height="42" class="d-inline-block align-text-top">
+                <img src="{{ asset('images/logo2.png') }}" alt="Logo" width="48" height="42" class="d-inline-block align-text-top">
             </a>
             <a class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -40,7 +40,7 @@
 
                 <form action="{{route('logout')}}" method="POST">
                     @csrf
-                    <button type="submit" class="nav-link fw-bold" style="color: #000000">Sair</button>
+                    <button type="submit" class="nav-link fw-bold text-danger" >Sair</button>
                 </form>
             </div>
         </div>
