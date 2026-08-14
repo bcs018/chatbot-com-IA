@@ -1,4 +1,4 @@
-<x-app title="Cadastro de Empresas">
+<x-dashboard title="Cadastro de Empresas">
     <div class="pt-5 text-center">
         <h2>Cadastro de usuários</h2>
     </div>
@@ -57,4 +57,4 @@
             @endif
         </div>
     </div>
-</x-app>
+</x-dashboard>

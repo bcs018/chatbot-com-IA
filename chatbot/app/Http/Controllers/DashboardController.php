@@ -3,39 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        if (Auth::check())
-            return to_route('empresa.create');
-
-        return view('login.index');
+        return view ('painel.index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function login(Request $request)
+    public function create()
     {
-        if (!Auth::attempt(['email'=>$request->email, 'password'=>$request->password]))
-        {
-            return redirect()->back()->with('error', 'Usuário ou senha inválido')->withInput();
-        }
-
-        return redirect()->route('dashboard');
-    }
-
-    public function logout(Request $request)
-    {
-        Auth::logout();
-
-        return to_route('login');
+        //
     }
 
     /**

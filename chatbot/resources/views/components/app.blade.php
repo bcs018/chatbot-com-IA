@@ -9,7 +9,31 @@
 </head>
 
 <body class="bg-color">
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="d-flex">
+        <aside class="bg-dark text-white p-3 vh-100" style="width: 260px;">
+            <h4 class="mb-4">Meu site</h4>
+
+            <nav class="nav flex-column">
+            <a class="nav-link text-white active bg-primary rounded mb-2" href="#">
+                Início
+            </a>
+            <a class="nav-link text-white mb-2" href="#">Dashboard</a>
+            <a class="nav-link text-white mb-2" href="#">Usuários</a>
+            <a class="nav-link text-white mb-2" href="#">Configurações</a>
+
+            <hr>
+
+            <a class="nav-link text-danger" href="#">Sair</a>
+            </nav>
+        </aside>
+
+        <main class="p-4">
+            {{ $slot }}
+        </main>
+    </div>
+
+
+    {{-- <nav class="nav flex-column navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('images/logo2.png') }}" alt="Logo" width="48" height="42" class="d-inline-block align-text-top">
@@ -47,7 +71,7 @@
     </nav>
     <div class="container">
         {{ $slot }}
-    </div>
+    </div> --}}
 </body>
 
 </html>
