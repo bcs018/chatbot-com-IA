@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - InteliChat</title>
+    <title>{{$title}} - InteliChat</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -31,17 +31,17 @@
                 <small class="menu-title">
                     PRINCIPAL
                 </small>
-                <a href="" class="menu-item active">
+                <a href="{{route('dashboard')}}" class="menu-item active">
                     <i class="bi bi-grid-1x2-fill"></i>
                     <span>Dashboard</span>
                 </a>
 
-                <a href="#" class="menu-item">
+                <a href="{{route('bots.create')}}" class="menu-item">
                     <i class="bi bi-robot"></i>
                     <span>Meu Bot</span>
                 </a>
 
-                <a href="#" class="menu-item">
+                <a href="{{route('documento.create')}}" class="menu-item">
                     <i class="bi bi-database"></i>
                     <span>Base de conhecimento</span>
                 </a>
@@ -158,14 +158,14 @@
             {{$slot}}
 
             <!-- FOOTER -->
-            <footer class="footer">
+            {{-- <footer class="footer">
                 <span>
                     © {{ date('Y') }} InteliChat
                 </span>
                 <span>
                     Feito para automatizar seu atendimento.
                 </span>
-            </footer>
+            </footer> --}}
         </main>
     </div>
 </body>

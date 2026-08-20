@@ -21,7 +21,7 @@ class User extends Authenticatable
 
     public function empresa()
     {
-        return $this->belongsTo(Empresa::class);
+        return $this->belongsTo(Empresa::class, 'empresa_id', 'id');
     }
 
     protected $fillable = [

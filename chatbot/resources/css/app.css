@@ -51,7 +51,6 @@ body {
     /* background: var(--background); */
 
     /* color: var(--text); */
-
     font-family:
         Inter,
         -apple-system,
@@ -360,9 +359,7 @@ body {
 ========================= */
 
 .main {
-
     min-height: 100vh;
-
 }
 
 
