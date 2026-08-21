@@ -14,7 +14,9 @@ class BotController extends Controller
      */
     public function index()
     {
-        //
+        $bots = Bot::where('empresa_id', auth()->user()->empresa_id)->get();
+
+        return view ('painel.bot.index', compact('bots'));
     }
 
     /**

@@ -36,12 +36,12 @@
                     <span>Dashboard</span>
                 </a>
 
-                <a href="{{route('bots.create')}}" class="menu-item">
+                <a href="{{route('bots.index')}}" class="menu-item">
                     <i class="bi bi-robot"></i>
                     <span>Meu Bot</span>
                 </a>
 
-                <a href="{{route('documento.create')}}" class="menu-item">
+                <a href="{{route('documento.index')}}" class="menu-item">
                     <i class="bi bi-database"></i>
                     <span>Base de conhecimento</span>
                 </a>

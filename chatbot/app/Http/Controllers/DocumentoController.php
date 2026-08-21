@@ -14,7 +14,12 @@ class DocumentoController extends Controller
      */
     public function index()
     {
-        //
+        $conhecimentos = Bot::with('documentos')->where('empresa_id', auth()->user()->empresa_id )->get();
+
+        // dd($conhecimentos);
+
+        return view ('painel.documento.index', compact('conhecimentos'));
+
     }
 
     /**
