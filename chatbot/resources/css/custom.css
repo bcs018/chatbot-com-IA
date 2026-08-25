@@ -70,3 +70,11 @@ footer {
 {
     background-color: #1f1f1f;
 }
+
+.btn-excluir {
+  border: 0;
+  background: transparent;
+  color: #dc2626;
+  cursor: pointer;
+  padding: 6px;
+}

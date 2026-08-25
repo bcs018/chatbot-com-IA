@@ -13,35 +13,51 @@
                 </a>
             </div>
 
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Bot</th>
-                        <th scope="col">Titulo conhecimento</th>
-                        <th scope="col">Conhecimento</th>
-                        <th scope="col">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($conhecimentos as $conhecimento)
-                        <tr>
-                            <td>{{$conhecimento->nome}}</td>
-                            @foreach ($conhecimento->documentos as $documento)
-                                <td>{{($documento->titulo != null) ? $documento->titulo : 'Bot sem conhecimento'}}</td> Tem que arrumar aqui
-                                <td>{{$documento->conteudo}}</td>
-                            @endforeach
-                            <td>
-                                <a href="/teste" class="text-decoration-none" style="color: crimson">
-                                    <i class="bi bi-trash3-fill me-2" title="Excluir bot"></i>
-                                </a>
-                                <a href="/teste" class="text-decoration-none" style="color: black">
-                                    <i class="bi bi-pencil-square" title="Editar bot"></i>
-                                </a>
-                            <td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            @if (session('success'))
+                <div class="mt-3 alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if ($conhecimentos->isNotEmpty())
+                <table class="table table-hover">
+                    <tbody>
+                        @foreach ($conhecimentos as $conhecimento)
+                            <tr class="table-active">
+                                <td colspan="3" class="p-3">{{$conhecimento->nome}}</td>
+                            </tr>
+                            @forelse ($conhecimento->documentos as $documento)
+                                <tr>
+                                    <td class="ps-5 p-3">{{$documento->titulo}}</td> 
+                                    <td class="p-3">{{$documento->conteudo}}</td>
+                                    <td class="p-3">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <form action="{{route('documento.destroy', $documento->id)}}" method="POST" >
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn-excluir">
+                                                    <i class="bi bi-trash3-fill me-2" title="Excluir conhecimento"></i>    
+                                                </button>
+                                            </form>
+                                            
+                                            <a href="" class="text-decoration-none" style="color: #000000" >
+                                                <i class="bi bi-pencil-square" title="Editar conhecimento"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty 
+                                <tr>
+                                    <td class="ps-5 p-3"><i>Bot sem conhecimento cadastrado</i></td> 
+                                    <td class="p-3" colspan="2"><i>Bot sem conhecimento cadastrado</i></td> 
+                                </tr>
+                            @endforelse
+                        @endforeach
+                    </tbody>
+                </table>
+            @else 
+                <h5 class="text-center">Não há conhecimentos cadastrados</h5>
+            @endif
         </div>
     </div>
 

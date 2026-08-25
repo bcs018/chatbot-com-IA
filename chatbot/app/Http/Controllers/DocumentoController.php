@@ -59,7 +59,7 @@ class DocumentoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -75,6 +75,9 @@ class DocumentoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $documento = Documento::find($id);
+        $documento->delete();
+
+        return redirect()->back()->with('success', 'Conhecimento excluido com sucesso');
     }
 }

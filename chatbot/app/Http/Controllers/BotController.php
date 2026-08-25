@@ -70,7 +70,9 @@ class BotController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $bots = Bot::find($id);
+
+        return view('painel.bot.edit', compact('bots'));
     }
 
     /**
@@ -78,7 +80,14 @@ class BotController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $bot = Bot::find($id);
+        $bot->nome = $request->nome;
+        $bot->empresa_id = auth()->user()->empresa_id;
+
+        if ($request->has('ativo'))
+            $bot->ativo = 1;
+        else 
+            $bot->ativo = 0;
     }
 
     /**
@@ -86,6 +95,9 @@ class BotController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $bot = Bot::find($id);
+        $bot->delete();
+
+        return redirect()->back()->with('success', 'Bot excluido com sucesso');
     }
 }

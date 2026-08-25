@@ -26,6 +26,7 @@ class DocumentoRequest extends FormRequest
         return [
             'titulo'   => ['required'],
             'conteudo' => ['required'],
+            'bot'      => ['required']
         ];
     }
 
@@ -35,6 +36,7 @@ class DocumentoRequest extends FormRequest
         return [
             'titulo.required'   => 'Campo Título é obrigatório',
             'conteudo.required' => 'Campo Conhecimento é obrigatório',
+            'bot.required'      => 'Campo Bot é obrigatório, cadastre um Bot antes de cadastrar um conhecimento',
         ];
     }
 }
