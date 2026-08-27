@@ -70,7 +70,7 @@ class BotController extends Controller
      */
     public function edit(string $id)
     {
-        $bots = Bot::find($id);
+        $bots = Bot::where('id',$id)->where('empresa_id', auth()->user()->empresa_id)->get();
 
         return view('painel.bot.edit', compact('bots'));
     }

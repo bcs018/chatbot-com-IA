@@ -40,7 +40,7 @@
                                                 </button>
                                             </form>
                                             
-                                            <a href="" class="text-decoration-none" style="color: #000000" >
+                                            <a href="{{route('documento.edit', $documento->id)}}" class="text-decoration-none" style="color: #000000" >
                                                 <i class="bi bi-pencil-square" title="Editar conhecimento"></i>
                                             </a>
                                         </div>

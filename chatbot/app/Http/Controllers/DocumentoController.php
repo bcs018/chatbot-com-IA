@@ -59,7 +59,16 @@ class DocumentoController extends Controller
      */
     public function edit(string $id)
     {
-        
+
+        $documento = Documento::where('id', $id)
+        ->whereHas('bot', function ($q) {
+            $q->where('empresa_id', auth()->user()->empresa_id);
+        })
+        ->firstOrFail();
+
+        $bots = Bot::where('empresa_id', auth()->user()->empresa_id)->get();
+
+        return view('painel.documento.edit', ['documento' => $documento, 'bots' => $bots]);
     }
 
     /**
