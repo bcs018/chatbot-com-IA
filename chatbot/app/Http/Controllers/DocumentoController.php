@@ -74,9 +74,15 @@ class DocumentoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(DocumentoRequest $request, string $id)
     {
-        //
+        $documento = Documento::findOrFail($id);
+        $documento->titulo   = $request->titulo;
+        $documento->conteudo = $request->conteudo;
+        $documento->bot_id   = $request->bot;
+        $documento->save();
+
+        return redirect()->back()->with('success', 'Conhecimento alterado com sucesso');
     }
 
     /**

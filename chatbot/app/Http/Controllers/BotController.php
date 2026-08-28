@@ -70,7 +70,7 @@ class BotController extends Controller
      */
     public function edit(string $id)
     {
-        $bots = Bot::where('id',$id)->where('empresa_id', auth()->user()->empresa_id)->get();
+        $bots = Bot::where('id',$id)->where('empresa_id', auth()->user()->empresa_id)->firstOrFail();
 
         return view('painel.bot.edit', compact('bots'));
     }
@@ -80,7 +80,7 @@ class BotController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $bot = Bot::find($id);
+        $bot = Bot::with('empresa')->find($id);
         $bot->nome = $request->nome;
         $bot->empresa_id = auth()->user()->empresa_id;
 
@@ -88,6 +88,10 @@ class BotController extends Controller
             $bot->ativo = 1;
         else 
             $bot->ativo = 0;
+
+        $bot->save();
+
+        return redirect()->back()->with('success', 'Bot atualizado com sucesso');
     }
 
     /**

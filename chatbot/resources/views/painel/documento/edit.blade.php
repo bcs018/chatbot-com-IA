@@ -6,8 +6,9 @@
     
     <div class="pt-5 d-flex justify-content-center">
         <div class="col-9">
-            <form action="{{route('documento.store')}}" method="POST">
+            <form action="{{route('documento.update', $documento->id)}}" method="POST">
                 @csrf
+                @method('PATCH')
                 <div class="mb-3">
                     <label for="titulo" class="form-label">Título</label>
                     <input type="text" 

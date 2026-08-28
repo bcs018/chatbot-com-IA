@@ -6,12 +6,18 @@
     
     <div class="pt-5 d-flex justify-content-center">
         <div class="col-9">
-
-            <form action="{{route('bots.store')}}" method="POST">
+            <form action="{{route('bots.update', $bots->id)}}" method="POST">
                 @csrf
+                @method('PATCH')
                 <div class="mb-3">
-                    <label for="name" class="form-label">Nome do bot</label>
-                    <input type="text" class="form-control" id="nome" aria-describedby="nome" value="{{old('nome', $bots->nome)}}" name="nome" placeholder="Exemplo: Serviços da clínica, Sobre a empresa ou Atendimento ao cliente">
+                    <label for="nome" class="form-label">Nome do bot</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="nome" 
+                           aria-describedby="nome" 
+                           value="{{old('nome', $bots->nome)}}" 
+                           name="nome" 
+                           placeholder="Exemplo: Serviços da clínica, Sobre a empresa ou Atendimento ao cliente">
                 </div>
                 <div class="mb-3">
                     <div class="form-check">
