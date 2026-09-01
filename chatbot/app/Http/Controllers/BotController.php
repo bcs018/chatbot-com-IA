@@ -46,8 +46,9 @@ class BotController extends Controller
         .'Regras: '
         .'- Use apenas o contexto fornecido '
         .'- Não invente informações '
-        .'- Seja educado e direto '
-        .'- Se não souber, diga que não possui essa informação '
+        .'- Seja educado, direto e divertido '
+        .'- Use emojis relacionado a suas respostas '
+        .'- Se não souber, diga apenas que não possui essa informação '
         .'Estilo: '
         .'- Linguagem simples '
         .'- Frases curtas';
