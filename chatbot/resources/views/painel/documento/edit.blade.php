@@ -55,34 +55,68 @@
                 </div>
             @endif
 
-            <div class="mt-5 mb-5">
-                <strong>📚 Como cadastrar?</strong>
-                <p>
-                    Adicione informações uma por uma do seu negócio para que o bot possa responder seus clientes automaticamente<br> 
-                    como horários, serviços e regras do seu negócio..
-                </p>
-                <hr>
-                <p>
-                    <strong>Exemplos:</strong>
-                </p>
+            <div class="container mt-5 mb-5">
+                <h2>📚 Como funciona o cadastro de conhecimento?</h2>
+
+                <div class="box">
+                    Neste sistema, você cadastra informações no formato de <b>Pergunta</b> e <b>Resposta</b>.
+                    O sistema junta esses dois campos e <b>alimenta a IA</b>, que será usado para busca
+                    inteligente.
+                </div>
+
+                <h2 class="mt-4">🧠 Como você deve cadastrar</h2>
+
+                <p>Preencha sempre assim:</p>
+
                 <ul>
-                    <li><b>Título:</b> Horário atendimento<br><b>&nbsp;Conhecimento:</b> Atendemos de segunda a sexta das 08h às 18h.</li>
-                    <hr>
-                    <li><b>Título:</b> Convênios<br><b>&nbsp;Conhecimento:</b> Aceitamos convênio Unimed, Bradesco e SulAmérica.</li>
-                    <hr>
-                    <li><b>Título:</b> Entregas<br><b>&nbsp;Conhecimento:</b> Entrega disponível apenas na cidade de São Paulo.</li>
-                    <hr>
-                    <li><b>Título:</b> Horário suporte<br><b>&nbsp;Conhecimento:</b> Suporte técnico via WhatsApp em horário comercial.</li>
-                    <hr>
-                    <li><b>Título:</b> Tipo Materiais<br><b>&nbsp;Conhecimento:</b> Trabalhamos somente com ferro e alumínio.</li>
+                    <li><span class="highlight">Pergunta:</span> intenção do usuário</li>
+                    <li><span class="highlight">Resposta:</span> informação completa da base</li>
                 </ul>
-                <hr>
-                <p>
-                    💡 Quanto mais claro e organizado, melhor será a resposta do seu bot.
-                </p>
-                <p>
-                    💡 Adicione o máximo de informações possíveis, mas não repetidas.
-                </p>
+
+                <div class="card-explica">
+                    <h3>📌 Exemplo 1</h3>
+                    <b>Pergunta:</b> Qual é o horário de atendimento?<br>
+                    <b>Resposta:</b> Atendemos de segunda a sexta das 08h às 18h.
+                </div>
+
+                <div class="card-explica">
+                    <h3>📌 Exemplo 2</h3>
+                    <b>Pergunta:</b> Vocês fazem entrega?<br>
+                    <b>Resposta:</b> A entrega está disponível somente no estado de São Paulo.
+                </div>
+
+                <div class="card-explica">
+                    <h3>📌 Exemplo 3</h3>
+                    <b>Pergunta:</b> Quais são as formas de pagamento?<br>
+                    <b>Resposta:</b> Parcelamos em até 10x sem juros ou 5% de desconto à vista.
+                </div>
+
+                <h2 class="mt-4">🔍 Como funciona na busca</h2>
+
+                <div class="box">
+                    Quando o usuário fizer uma pergunta, a IA faz a busca com o significado da pergunta dele com as
+                    perguntas cadastrados.
+                    Ele encontra o trecho mais parecido e gera a resposta final.
+                </div>
+
+                <div class="example">
+                    Usuário: "Até que horas vocês funcionam?"  <br><br>
+
+                    IA encontra:
+                    "Qual é o horário de atendimento? Atendemos de segunda a sexta das 08h às 18h." <br><br>
+
+                    IA responde:
+                    "Nosso horário de atendimento é de segunda a sexta das 08h às 18h."
+                </div>
+
+                <h2 class="mt-4">🚀 Dica importante</h2>
+
+                <ul>
+                    <li>Use perguntas simples e diretas</li>
+                    <li>Evite textos muito curtos na resposta</li>
+                    <li>Não precisa cadastrar várias variações (a IA já entende isso)</li>
+                    <li>Sempre pense: “como o usuário perguntaria isso?”</li>
+                </ul>
             </div>
         </div>
     </div>

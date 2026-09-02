@@ -2,7 +2,7 @@
 
 return [
 
-    'api_openai' => 'sk-proj-_Z7OhX6xvD2FKLsNXsh5yl6MhNBVpsgvI9tf1KFdIV9prlhCMeeu6JrpYj1O1YqyKHnxhFT3BlbkFJu8e51xN5WwtXDog5zrkMt23cL3vRQIfQT43b5366vPVCdvdaGXXawLFWV8SgSsEqZWTkDQ',
+    'api_openai' => env('API_OPENAI'),
 
     /*
     |--------------------------------------------------------------------------

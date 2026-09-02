@@ -49,15 +49,15 @@ class DocumentoController extends Controller
 
         $response = $client->embeddings()->create([
             'model' => 'text-embedding-3-small',
-            'input' => $request->conteudo
+            'input' => $request->titulo . ' ' . $request->conteudo
         ]);
                 
         $embedding = json_encode($response->embeddings[0]->embedding);
 
         $embedding = new Embedding();
         $embedding->documento_id = $documento->id;
-        $embedding->chunk = $request->conteudo;
-        $embedding->embedding = json_encode($response->embeddings[0]->embedding);
+        $embedding->embedding    = json_encode($response->embeddings[0]->embedding);
+        $embedding->chunk        =  $request->titulo . ' ' . $request->conteudo;
         $embedding->save();
 
         return redirect()->back()->with('success', 'Conhecimento cadastrado com sucesso');
