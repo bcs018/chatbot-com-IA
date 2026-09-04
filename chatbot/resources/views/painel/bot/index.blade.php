@@ -24,6 +24,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Nome</th>
+                            <th scope="col">Domínio</th>
                             <th scope="col">Ativo</th>
                             <th scope="col">Ações</th>
                         </tr>
@@ -32,6 +33,11 @@
                         @foreach ($bots as $bot)
                             <tr>
                                 <td>{{$bot->nome}}</td>
+                                @forelse ($bot->domains as $domain)
+                                    <td>{{$domain->domain}}</td>
+                                @empty 
+                                    <td>-</td>
+                                @endforelse
                                 <td>{{($bot->ativo == 1) ? 'SIM' : 'NÃO'}}</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">

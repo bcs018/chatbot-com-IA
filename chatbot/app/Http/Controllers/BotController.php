@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\BelongsToRelationship;
 use Illuminate\Http\Request;
 use  App\Http\Requests\BotRequest;
 use App\Models\Bot;
+use App\Models\BotDomain;
 
 class BotController extends Controller
 {
@@ -14,7 +15,9 @@ class BotController extends Controller
      */
     public function index()
     {
-        $bots = Bot::where('empresa_id', auth()->user()->empresa_id)->get();
+        // $bots = Bot::where('empresa_id', auth()->user()->empresa_id)->get();
+        
+        $bots = Bot::with('domains')->where('empresa_id', auth()->user()->empresa_id)->get();
 
         return view ('painel.bot.index', compact('bots'));
     }
@@ -55,6 +58,16 @@ class BotController extends Controller
         
         $bot->save();
 
+        $host = parse_url($request->domain, PHP_URL_HOST);
+
+        if ($host == null)
+            $host = $request->domain;
+
+        $botDomain = new BotDomain();
+        $botDomain->domain = $host;
+        $botDomain->bot_id = $bot->id;
+        $botDomain->save();
+
         return redirect()->back()->with('success', 'Bot incluido com sucesso');
     }
 
@@ -71,7 +84,10 @@ class BotController extends Controller
      */
     public function edit(string $id)
     {
-        $bots = Bot::where('id',$id)->where('empresa_id', auth()->user()->empresa_id)->firstOrFail();
+        $bots = Bot::with('domains')
+                    ->where('empresa_id', auth()->user()->empresa_id)
+                    ->where('id', $id)
+                    ->firstOrFail();
 
         return view('painel.bot.edit', compact('bots'));
     }
@@ -79,7 +95,7 @@ class BotController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BotRequest $request, string $id)
     {
         $bot = Bot::with('empresa')->find($id);
         $bot->nome = $request->nome;
@@ -91,6 +107,20 @@ class BotController extends Controller
             $bot->ativo = 0;
 
         $bot->save();
+
+        $host = parse_url($request->domain, PHP_URL_HOST);
+
+        if ($host == null)
+            $host = $request->domain;
+
+        $botDomain = BotDomain::where('bot_id', $id)->first();
+
+        if($botDomain == null)
+            $botDomain = new BotDomain();
+
+        $botDomain->domain = $host;
+        $botDomain->bot_id = $id;
+        $botDomain->save();
 
         return redirect()->back()->with('success', 'Bot atualizado com sucesso');
     }

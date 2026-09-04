@@ -20,4 +20,9 @@ class Bot extends Model
     {
         return $this->hasMany(Conversa::class);
     }
+
+    public function domains()
+    {
+        return $this->hasMany(BotDomain::class, 'bot_id');
+    }
 }

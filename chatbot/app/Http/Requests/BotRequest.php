@@ -24,7 +24,8 @@ class BotRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => ['required'],
+            'nome'   => ['required'],
+            'domain' => ['required'],
         ];
     }
 
@@ -32,7 +33,8 @@ class BotRequest extends FormRequest
     public function messages()
     {
         return [
-            'nome.required' => 'Campo Nome do bot é obrigatório',
+            'nome.required'   => 'Campo Nome do bot é obrigatório',
+            'domain.required' => 'Campo Domínio é obrigatório',
         ];
     }
 }

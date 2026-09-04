@@ -1167,19 +1167,6 @@ body {
 /* ====================================
     EXPLICAÇÃO CADASTRO CONHECIMENTOS
 ======================================= */
-.container {
-    max-width: 900px;
-    margin: auto;
-    background: #fff;
-    padding: 25px;
-    border-radius: 10px;
-}
-
-h1 {
-    font-size: 22px;
-    margin-bottom: 10px;
-}
-
 .box {
     background: #f0f8ff;
     padding: 15px;
@@ -1203,7 +1190,6 @@ h1 {
 ul {
     line-height: 1.8;
 }
-
 
 .card-explica {
     background: #fafafa;

@@ -20,6 +20,16 @@
                            placeholder="Exemplo: Serviços da clínica, Sobre a empresa ou Atendimento ao cliente">
                 </div>
                 <div class="mb-3">
+                    <label for="name" class="form-label">Domínio do site onde o bot estará</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="domain" 
+                           aria-describedby="domain" 
+                           value="{{old('nome', $bots->domains->first()?->domain)}}" 
+                           name="domain" 
+                           placeholder="Exemplo: site-example.com.br">
+                </div>
+                <div class="mb-3">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="ativo" name="ativo" {{$bots->ativo ? 'checked' : ''}}>
                         <label class="form-check-label" for="ativo">
@@ -27,7 +37,7 @@
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="btn bg-main-buttom">Cadastrar</button>
+                <button type="submit" class="btn bg-main-buttom">Editar</button>
             </form>
             @if (session('success'))
                 <div class="mt-3 alert alert-success">
