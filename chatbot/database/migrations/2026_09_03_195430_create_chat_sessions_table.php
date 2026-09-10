@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('chat_sessions', function (Blueprint $table) {
             $table->id();
             $table->string('token');
+            $table->string('ip');
             $table->foreignId('empresa_id')
                   ->constrained('empresas')
                   ->onDelete('cascade');

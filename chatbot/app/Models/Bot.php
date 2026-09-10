@@ -25,4 +25,9 @@ class Bot extends Model
     {
         return $this->hasMany(BotDomain::class, 'bot_id');
     }
+
+    public function chatSessions()
+    {
+        return $this->hasMany(ChatSession::class);
+    }
 }

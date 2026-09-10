@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\BotDomain;
+use App\Models\Bot;
+use App\Models\ChatSession;
 
 class ChatController extends Controller
 {
@@ -16,9 +19,35 @@ class ChatController extends Controller
     {
         $token = bin2hex(random_bytes(32));
 
-        $expire = now()->addMinutes('30');
+        $expire = now()->addMinutes(30);
 
-        return response()->json(['session_id'=>uniqid()]);
+        $origin = $request->header('Origin');
+
+        $bot_id = explode('_', $request->header('Data-Public-Key'));
+
+        if (!$origin) 
+        {
+            return response()->json(['error' => 'Requisição inválida'], 403);
+        }
+
+        $host = parse_url($origin, PHP_URL_HOST);
+
+        $allowed = BotDomain::where('bot_id', last($bot_id))
+            ->where('domain', $host)
+            ->exists();
+
+        if (!$allowed) 
+        {
+            return response()->json(['error' => 'Não autorizado'], 403);
+        }
+
+        $dados = Bot::with('empresa')->where('id', last($bot_id))->get();
+
+        dd($dados);
+
+        $chatSession = new ChatSession();
+
+        return response()->json(['session_id'=>$token]);
     }
 
     /**

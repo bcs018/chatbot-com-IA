@@ -180,7 +180,8 @@
             const res = await fetch(API_URL_SES, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type"   : "application/json",
+                    "Data-Public-Key": API_KEY
                 },
                 // body: JSON.stringify({
                 //     message: text,
