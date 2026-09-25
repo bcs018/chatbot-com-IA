@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\BotDomain;
 use App\Models\Bot;
 use App\Models\ChatSession;
+use Illuminate\Support\Facades\Log;
 
 class ChatController extends Controller
 {
@@ -25,14 +26,16 @@ class ChatController extends Controller
 
         $bot_id = explode('_', $request->header('Data-Public-Key'));
 
-        if (!$origin) 
+        if (!$origin || $origin == 'null') 
         {
             return response()->json(['error' => 'Requisição inválida'], 403);
         }
 
         $host = parse_url($origin, PHP_URL_HOST);
 
-        $allowed = BotDomain::where('bot_id', last($bot_id))
+        Log::alert($request->header);
+
+        $allowed = BotDomain::where('bot_id', end($bot_id))
             ->where('domain', $host)
             ->exists();
 
@@ -41,13 +44,28 @@ class ChatController extends Controller
             return response()->json(['error' => 'Não autorizado'], 403);
         }
 
-        $dados = Bot::with('empresa')->where('id', last($bot_id))->get();
+        $dados = Bot::with('empresa')->findOrFail(end($bot_id));
+        
+        $session = ChatSession::where('bot_id', end($bot_id))
+                              ->where('empresa_id', $dados->empresa->id)
+                              ->where('ip', $request->ip())
+                              ->orderBy('created_at', 'desc')
+                              ->first();
+        
+        if (!$session || $session->expire_at->isPast())
+        {
+            $chatSession = new ChatSession();
+            $chatSession->token      = $token;
+            $chatSession->ip         = $request->ip();
+            $chatSession->empresa_id = $dados->empresa->id;
+            $chatSession->bot_id     = $dados->id;
+            $chatSession->expire_at  = $expire;
+            $chatSession->save();
 
-        dd($dados);
+            return response()->json(['session_id' => $token]);
+        }
 
-        $chatSession = new ChatSession();
-
-        return response()->json(['session_id'=>$token]);
+        return response()->json(['session_id' => $session->token]);
     }
 
     /**

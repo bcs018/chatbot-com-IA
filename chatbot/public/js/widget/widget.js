@@ -181,7 +181,7 @@
                 method: "POST",
                 headers: {
                     "Content-Type"   : "application/json",
-                    "Data-Public-Key": API_KEY
+                    "Data-Public-Key": PK_KEY
                 },
                 // body: JSON.stringify({
                 //     message: text,

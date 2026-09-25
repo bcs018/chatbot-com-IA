@@ -27,3 +27,8 @@ Route::get('/cadastre-se'  , [HomeController::class, 'create'])->name('cadastres
 Route::get('/login'  , [LoginController::class, 'index'])->name('login');
 Route::post('/login' , [LoginController::class, 'login'])->name('loginPost');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+Route::get('/teste', function(){
+    return view('teste.index');
+});
