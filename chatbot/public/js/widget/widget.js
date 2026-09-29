@@ -4,7 +4,7 @@
     var session = '';
 
     const PK_KEY = script.getAttribute("data-puplic-key");
-    const API_URL = "http://127.0.0.1:8000/api/v1/chat";
+    const API_URL = "http://127.0.0.1:8000/api/v1/send";
     const API_URL_SES = "http://127.0.0.1:8000/api/v1/session";
 
     getSession();
@@ -155,7 +155,7 @@
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + API_KEY
+                    "Authorization": "Bearer " + session
                 },
                 body: JSON.stringify({
                     message: text,
@@ -183,10 +183,10 @@
                     "Content-Type"   : "application/json",
                     "Data-Public-Key": PK_KEY
                 },
-                // body: JSON.stringify({
-                //     message: text,
-                //     url: window.location.href
-                // })
+                body: JSON.stringify({
+                    message: 'text',
+                    // url: window.location.href
+                })
             });
 
             const data = await res.json();
