@@ -93,6 +93,14 @@ class DocumentoController extends Controller
      */
     public function update(DocumentoRequest $request, string $id)
     {
+        // $client = OpenAI::client(config('app.api_openai'));
+
+        // $response = $client->embeddings()->create([
+        //     'model' => 'text-embedding-3-small',
+        //     'input' => $request->titulo . ' ' . $request->conteudo
+        // ]);
+                
+        // $embedding = json_encode($response->embeddings[0]->embedding);
         $documento = Documento::findOrFail($id);
         $documento->titulo   = $request->titulo;
         $documento->conteudo = $request->conteudo;

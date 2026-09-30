@@ -15,6 +15,10 @@ class ChatController extends Controller
 {
     public function send(Request $request)
     {
+        $chatSession = ChatSession::with(['bot','empresa'])
+                                  ->where('token', $request->bearerToken())
+                                  ->first();
+
         // Gera embedding da pergunta
         $client = OpenAI::client(config('app.api_openai'));
 
@@ -25,8 +29,12 @@ class ChatController extends Controller
         
         $embeddingPergunta = $response->embeddings[0]->embedding;
 
-        $rows = Embedding::all('chunk', 'embedding');
-
+        $rows = Embedding::select('embedding', 'chunk')
+                         ->whereHas('documento', function ($q) use ($chatSession) {
+                            $q->where('bot_id', $chatSession->bot_id);
+                         })
+                         ->get();
+ 
         $melhor = null;
         $maiorScore = -1;
 
@@ -43,14 +51,14 @@ class ChatController extends Controller
             }
         }
 
-        Log::alert($melhor);
+        Log::alert("Melhor escolha: $melhor");
 
         $response = $client->chat()->create([
             'model' => 'gpt-4o-mini',
             'messages' => [
                 [
                     'role' => 'system',
-                    'content' => "Você é um assistente virtual da empresa: Empresa de TI, Seu objetivo é responder clientes com clareza e rapidez. Regras: - Use apenas o contexto fornecido - Não invente informações - Seja educado e direto - Se não souber, diga que não possui essa informação Estilo: - Linguagem simples - Frases curtas. Contexto: $melhor"
+                    'content' => $chatSession->bot->prompt_base . ' Contexto: ' . $melhor
                 ],
                 [
                     'role' => 'user',
@@ -59,7 +67,7 @@ class ChatController extends Controller
             ]
         ]);
 
-        Log::alert($response->choices[0]->message->content);
+        Log::alert('Resposta IA: '.$response->choices[0]->message->content);
 
         return response()->json(['reply'=>$response->choices[0]->message->content]);
     }
@@ -70,16 +78,25 @@ class ChatController extends Controller
         $normA = 0;
         $normB = 0;
 
-        // $a = json_decode($a, true);
-        // $b = json_decode($b, true);
+        $a = $this->normalizeEmbedding($a);
+        $b = $this->normalizeEmbedding($b);
 
         for ($i = 0; $i < count($a); $i++) {
-            $dot += $a[$i] * $b[$i];
+            $dot += (float)$a[$i] * (float)$b[$i];
             $normA += $a[$i] * $a[$i];
             $normB += $b[$i] * $b[$i];
         }
         
         return $dot / (sqrt($normA) * sqrt($normB));
+    }
+
+    private function normalizeEmbedding($embedding)
+    {
+        if (is_string($embedding)) {
+            $embedding = json_decode($embedding, true);
+        }
+
+        return array_map('floatval', $embedding);
     }
 
     public function session(Request $request)

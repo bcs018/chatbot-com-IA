@@ -10,7 +10,7 @@
 <body>
 	<i>OI</i>
 
-    <script src="http://127.0.0.1:8000/js/widget/widget.js" data-puplic-key="pk_key_5"></script>
+    <script src="http://127.0.0.1:8000/js/widget/widget.js" data-puplic-key="pk_key_9"></script>
 </body>
 
 </html>
