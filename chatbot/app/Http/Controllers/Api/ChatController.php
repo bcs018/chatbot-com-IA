@@ -8,6 +8,8 @@ use App\Models\BotDomain;
 use App\Models\Bot;
 use App\Models\ChatSession;
 use App\Models\Embedding;
+use App\Models\Conversa;
+use App\Models\Mensagem;
 use Illuminate\Support\Facades\Log;
 use OpenAI;
 
@@ -18,6 +20,17 @@ class ChatController extends Controller
         $chatSession = ChatSession::with(['bot','empresa'])
                                   ->where('token', $request->bearerToken())
                                   ->first();
+
+        $conversa = Conversa::where('bot_id', $chatSession->bot_id)
+                            ->where('session_id', $chatSession->id)
+                            ->first();
+
+        // Salva mensagem do usuario
+        $mensagem = new Mensagem();
+        $mensagem->coversa_id = $conversa->id;
+        $mensagem->tipo = 'user';
+        $mensagem->mensagem = $request->message;
+        $mensagem->save();
 
         // Gera embedding da pergunta
         $client = OpenAI::client(config('app.api_openai'));
@@ -68,6 +81,13 @@ class ChatController extends Controller
         ]);
 
         Log::alert('Resposta IA: '.$response->choices[0]->message->content);
+
+        // Salva mensagem da resposta IA
+        $mensagem = new Mensagem();
+        $mensagem->coversa_id = $conversa->id;
+        $mensagem->tipo = 'bot';
+        $mensagem->mensagem = $response->choices[0]->message->content;
+        $mensagem->save();
 
         return response()->json(['reply'=>$response->choices[0]->message->content]);
     }
@@ -120,10 +140,10 @@ class ChatController extends Controller
             ->where('domain', $host)
             ->exists();
 
-        // if (!$allowed) 
-        // {
-        //     return response()->json(['error' => 'Não autorizado'], 403);
-        // }
+        if (!$allowed) 
+        {
+            return response()->json(['error' => 'Não autorizado'], 403);
+        }
 
         $dados = Bot::with('empresa')->findOrFail(end($bot_id));
         
@@ -142,6 +162,11 @@ class ChatController extends Controller
             $chatSession->bot_id     = $dados->id;
             $chatSession->expire_at  = $expire;
             $chatSession->save();
+
+            $conversa = new Conversa();
+            $conversa->bot_id = end($bot_id);
+            $conversa->session_id = $chatSession->id;
+            $conversa->save();
 
             return response()->json(['session_id' => $token]);
         }
