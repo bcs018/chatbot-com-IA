@@ -27,7 +27,7 @@ class ChatController extends Controller
 
         // Salva mensagem do usuario
         $mensagem = new Mensagem();
-        $mensagem->coversa_id = $conversa->id;
+        $mensagem->conversa_id = $conversa->id;
         $mensagem->tipo = 'user';
         $mensagem->mensagem = $request->message;
         $mensagem->save();
@@ -84,7 +84,7 @@ class ChatController extends Controller
 
         // Salva mensagem da resposta IA
         $mensagem = new Mensagem();
-        $mensagem->coversa_id = $conversa->id;
+        $mensagem->conversa_id = $conversa->id;
         $mensagem->tipo = 'bot';
         $mensagem->mensagem = $response->choices[0]->message->content;
         $mensagem->save();

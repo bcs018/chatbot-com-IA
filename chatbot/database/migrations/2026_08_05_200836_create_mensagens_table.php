@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('mensagens', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('coversa_id')
+            $table->foreignId('conversa_id')
                   ->constrained('conversas')
                   ->cascadeOnDelete();
             $table->enum('tipo', ['user', 'bot']);

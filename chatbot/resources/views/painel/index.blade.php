@@ -30,7 +30,7 @@
                             Bots ativos
                         </span>
                         <strong class="stat-value">
-                            1
+                            {{ $qtdBots }}
                         </strong>
                         <small class="stat-description">
                             Seu bot está ativo
@@ -49,7 +49,7 @@
                             Conversas
                         </span>
                         <strong class="stat-value">
-                            152
+                            {{ $qtdConversas }}
                         </strong>
                         <small class="stat-description positive">
                             +12% este mês
@@ -68,7 +68,7 @@
                             Documentos
                         </span>
                         <strong class="stat-value">
-                            24
+                            {{ $qtdDocumentos }}
                         </strong>
                         <small class="stat-description">
                             Base de conhecimento
@@ -87,7 +87,7 @@
                             Respostas
                         </span>
                         <strong class="stat-value">
-                            1.284
+                            {{ $qtdMensagens }}
                         </strong>
                         <small class="stat-description positive">
                             +18% este mês
@@ -133,17 +133,17 @@
                             <div class="bot-meta">
                                 <span>
                                     <i class="bi bi-database"></i>
-                                    24 documentos
+                                    {{ $qtdDocumentos }} documentos
                                 </span>
                                 <span>
                                     <i class="bi bi-chat"></i>
-                                    152 conversas
+                                    {{ $qtdConversas }} conversas
                                 </span>
                             </div>
                         </div>
 
                         <div class="bot-action">
-                            <a href="#" class="btn btn-outline-custom">
+                            <a href="{{route('documento.index')}}" class="btn btn-outline-custom">
                                 Configurar
                             </a>
                         </div>
@@ -167,7 +167,7 @@
                     </div>
 
                     <div class="quick-actions">
-                        <a href="#" class="quick-action">
+                        <a href="{{route('documento.index')}}" class="quick-action">
                             <div class="quick-icon">
                                 <i class="bi bi-file-earmark-plus"></i>
                             </div>
@@ -197,7 +197,7 @@
                             <i class="bi bi-chevron-right"></i>
                         </a>
 
-                        <a href="#" class="quick-action">
+                        <a href="{{route('documento.index')}}" class="quick-action">
                             <div class="quick-icon">
                                 <i class="bi bi-gear"></i>
                             </div>
@@ -238,9 +238,9 @@
                         <table class="table conversation-table">
                             <thead>
                                 <tr>
-                                    <th>
+                                    {{-- <th>
                                         Cliente
-                                    </th>
+                                    </th> --}}
                                     <th>
                                         Última mensagem
                                     </th>
@@ -253,31 +253,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="client">
-                                            <div class="client-avatar">
-                                                J
-                                            </div>
+                                @foreach ($mensagens as $mensagem)
+                                    <tr>
+                                        
+                                        {{-- <td>
+                                            <div class="client">
+                                                <div class="client-avatar">
+                                                    J
+                                                </div>
 
-                                            <span>
-                                                João Silva
+                                                <span>
+                                                    João Silva
+                                                </span>
+                                            </div>
+                                        </td> --}}
+                                        <td>
+                                            {{$mensagem->mensagem}}
+                                        </td>
+                                        <td>
+                                            {{ $mensagem->created_at->format('d/m/Y H:i') }}
+                                        </td>
+                                        <td>
+                                            <span class="conversation-status">
+                                                OK
                                             </span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        Gostaria de saber os horários...
-                                    </td>
-                                    <td>
-                                        Hoje, 10:32
-                                    </td>
-                                    <td>
-                                        <span class="conversation-status">
-                                            Finalizada
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                {{-- <tr>
                                     <td>
                                         <div class="client">
                                             <div class="client-avatar">
@@ -322,7 +326,7 @@
                                             Finalizada
                                         </span>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             </tbody>
                         </table>
                     </div>

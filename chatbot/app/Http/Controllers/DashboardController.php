@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Bot;
+use App\Models\Mensagem;
 
 class DashboardController extends Controller
 {
@@ -11,7 +13,46 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view ('painel.index');
+        $qtdBots = Bot::where('empresa_id', auth()->user()->empresa_id)->count();
+        $bot = Bot::with(['conversas.mensagens', 'documentos'])->where('empresa_id', auth()->user()->empresa_id)->get();
+
+        $mensagensShow = Mensagem::whereHas('conversa.bot', function ($q) {
+            $q->where('empresa_id', auth()->user()->empresa_id);
+        })
+        ->orderBy('created_at', 'desc')
+        ->limit(10)
+        ->get();
+
+        $qtdConversas  = 0;
+        $qtdDocumentos = 0;
+        $qtdMensagens  = 0;
+
+        foreach ($bot as $b)
+        {
+            foreach ($b->conversas as $conversa)
+            {
+                foreach ($conversa->mensagens as $mensagens)
+                {
+                    if ($mensagens->tipo == 'bot')
+                        $qtdMensagens++;   
+                }
+
+                $qtdConversas++;
+            }
+                        
+            foreach ($b->documentos as $documento)
+                $qtdDocumentos++;
+        }
+
+        $dados = [
+            'qtdBots'       => $qtdBots, 
+            'qtdConversas'  => $qtdConversas, 
+            'qtdDocumentos' => $qtdDocumentos,
+            'qtdMensagens'  => $qtdMensagens,
+            'mensagens'     => $mensagensShow
+        ];
+
+        return view ('painel.index', $dados);
     }
 
     /**
