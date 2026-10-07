@@ -182,7 +182,7 @@
                             <i class="bi bi-chevron-right"></i>
                         </a>
 
-                        <a href="#" class="quick-action">
+                        <a href="#" class="quick-action" data-bs-toggle="modal"  id="instalarNoSite">
                             <div class="quick-icon">
                                 <i class="bi bi-code-slash"></i>
                             </div>
@@ -331,6 +331,24 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal instalar no site -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Instalar no seu site</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">OK</button>
+            </div>
             </div>
         </div>
     </div>

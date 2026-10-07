@@ -55,6 +55,11 @@ class DashboardController extends Controller
         return view ('painel.index', $dados);
     }
 
+    public function listBots()
+    {
+        return response()->json(["teste"=>"tese"]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
