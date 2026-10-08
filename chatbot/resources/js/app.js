@@ -1,8 +1,8 @@
-import './bootstrap';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
+
 import './painel/instalarSeuSite.js';
 
-import './bootstrap';
 
 const sidebar = document.getElementById('sidebar');
 const openSidebar = document.getElementById('openSidebar');

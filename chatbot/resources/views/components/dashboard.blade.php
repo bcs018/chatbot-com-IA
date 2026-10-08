@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{$title}} - InteliChat</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -47,6 +48,11 @@
                 </a>
 
                 <a href="#" class="menu-item">
+                    <i class="bi bi-chat-dots"></i>
+                    <span>Conversas</span>
+                </a>
+
+                <a href="#" class="menu-item" data-bs-toggle="modal" id="instalarNoSite2">
                     <i class="bi bi-chat-dots"></i>
                     <span>Conversas</span>
                 </a>
@@ -157,15 +163,32 @@
             <!-- CONTENT -->
             {{$slot}}
 
-            <!-- FOOTER -->
-            {{-- <footer class="footer">
-                <span>
-                    © {{ date('Y') }} InteliChat
-                </span>
-                <span>
-                    Feito para automatizar seu atendimento.
-                </span>
-            </footer> --}}
+            <!-- Modal instalar no site -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Instalar no seu site</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="bots" class="form-label">Selecione seu bot</label>
+                        <select id="bots" class="form-select">
+                        </select>
+
+                        <div class="mt-4" id="contentShowId" hidden>
+                            <p><b>Copie o código abaixo e cole no código HTML do seu site, antes da tag &lt;/body&gt;.</b></p>
+                            <pre class="codigo-widget"><code id="showScript"></code></pre>
+                            <p><b>Depois de salvar as alterações, o chatbot estará disponível no seu site.</b></p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">OK</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 </body>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Bot;
 use App\Models\Mensagem;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
@@ -57,7 +58,9 @@ class DashboardController extends Controller
 
     public function listBots()
     {
-        return response()->json(["teste"=>"tese"]);
+        $bots = Bot::select('nome', 'id')->where('empresa_id', auth()->user()->empresa_id)->get();
+
+        return response()->json($bots);
     }
 
     /**

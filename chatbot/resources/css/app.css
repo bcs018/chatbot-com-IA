@@ -1198,3 +1198,19 @@ ul {
     border-radius: 8px;
     margin-top: 15px;
 }
+
+.codigo-widget {
+    background: #353434;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-x: auto;
+    text-align: left;
+}
+
+.codigo-widget code {
+    font-family: inherit;
+}
