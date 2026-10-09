@@ -1,55 +1,56 @@
 (function () {
+    const modalElement = document.getElementById('exampleModal');
+    const botsSelect = document.getElementById('bots');
+    const contentShow = document.getElementById('contentShowId');
 
-    document.getElementById('instalarNoSite1').addEventListener('click', function(event) {
-        document.getElementById('contentShowId').setAttribute('hidden', true);
+    // Só executa se o modal existir na página
+    if (modalElement) 
+    {
+        modalElement.addEventListener('show.bs.modal', function () {
+            contentShow.hidden = true;
+            getBots();
+        });
+    }
 
-        getBots();
-
-        const modalElement = document.getElementById('exampleModal');
-
-        const modal = new bootstrap.Modal(modalElement);
-
-        modal.show()
-    });
-
-    document.getElementById('instalarNoSite2').addEventListener('click', function(event) {
-        document.getElementById('contentShowId').setAttribute('hidden', true);
-
-        getBots();
-
-        const modalElement = document.getElementById('exampleModal');
-
-        const modal = new bootstrap.Modal(modalElement);
-
-        modal.show()
-    });
-
-    document.getElementById('bots').addEventListener('change', function(event){
-        console.log('Selecionou:', this.value)
+    // Exibe o código quando um bot for selecionado
+    botsSelect?.addEventListener('change', function () {
+        if (!this.value) 
+        {
+            contentShow.hidden = true;
+            return;
+        }
 
         const showScript = document.getElementById('showScript');
 
-        showScript.textContent ='<script src="http://127.0.0.1:8000/js/widget/widget.js" data-puplic-key="pk_key_'+this.value+'"></script>';
-        document.getElementById('contentShowId').removeAttribute('hidden');
-    });
-})()
+        showScript.textContent =
+            '<script src="http://127.0.0.1:8000/js/widget/widget.js" data-puplic-key="pk_key_' +
+            this.value +
+            '"></script>';
 
-async function getBots()
+        contentShow.hidden = false;
+    });
+})();
+
+async function getBots() 
 {
     try 
     {
-        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const token = document.querySelector('meta[name="csrf-token"]')?.content;
 
         const res = await fetch('/dashboard/bots/instalar-no-site/list', {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': token
-            },
+            }
         });
 
-        const data = await res.json();
+        if (!res.ok) 
+        {
+            throw new Error(`Erro HTTP: ${res.status}`);
+        }
 
+        const data = await res.json();
         const select = document.getElementById('bots');
 
         select.innerHTML = '';
@@ -57,20 +58,18 @@ async function getBots()
         const option = document.createElement('option');
         option.value = '';
         option.textContent = 'Selecione um bot';
-
         select.appendChild(option);
 
         data.forEach(bot => {
             const option = document.createElement('option');
-
             option.value = bot.id;
             option.textContent = bot.nome;
-
             select.appendChild(option);
         });
     } 
     catch (err) 
     {
-        alert("Erro ao conectar com o servidor. " + err);
+        console.error('Erro ao carregar bots:', err);
+        alert('Erro ao carregar os bots.');
     }
 }

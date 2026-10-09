@@ -32,7 +32,7 @@
                 <small class="menu-title">
                     PRINCIPAL
                 </small>
-                <a href="{{route('dashboard')}}" class="menu-item active">
+                <a href="{{route('dashboard')}}" class="menu-item">
                     <i class="bi bi-grid-1x2-fill"></i>
                     <span>Dashboard</span>
                 </a>
@@ -52,9 +52,13 @@
                     <span>Conversas</span>
                 </a>
 
-                <a href="#" class="menu-item" data-bs-toggle="modal" id="instalarNoSite2">
-                    <i class="bi bi-chat-dots"></i>
-                    <span>Conversas</span>
+                <a href="#" 
+                   class="menu-item" 
+                   data-bs-toggle="modal"
+                   data-bs-target="#exampleModal" 
+                   id="instalarNoSite2">
+                    <i class="bi bi-code-slash"></i>
+                    <span>Instalar no seu site</span>
                 </a>
 
                 <small class="menu-title mt-4">
@@ -104,12 +108,6 @@
                     <i class="bi bi-list"></i>
                 </button>
 
-                <div class="topbar-title">
-                    <span class="d-none d-sm-inline">
-                        Dashboard
-                    </span>
-                </div>
-
                 <div class="topbar-actions">
                     <button class="icon-button">
                         <i class="bi bi-bell"></i>
@@ -128,7 +126,7 @@
 
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{route('usuario.index')}}">
                                     <i class="bi bi-person me-2"></i>
                                     Meu perfil
                                 </a>

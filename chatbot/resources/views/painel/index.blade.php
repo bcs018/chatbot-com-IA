@@ -182,7 +182,7 @@
                             <i class="bi bi-chevron-right"></i>
                         </a>
 
-                        <a href="#" class="quick-action" data-bs-toggle="modal"  id="instalarNoSite1">
+                        <a href="#" class="quick-action" data-bs-toggle="modal"  id="instalarNoSite1" data-bs-target="#exampleModal" >
                             <div class="quick-icon">
                                 <i class="bi bi-code-slash"></i>
                             </div>
@@ -238,9 +238,9 @@
                         <table class="table conversation-table">
                             <thead>
                                 <tr>
-                                    {{-- <th>
-                                        Cliente
-                                    </th> --}}
+                                    <th>
+                                        Origem
+                                    </th>
                                     <th>
                                         Última mensagem
                                     </th>
@@ -256,17 +256,25 @@
                                 @foreach ($mensagens as $mensagem)
                                     <tr>
                                         
-                                        {{-- <td>
+                                        <td>
                                             <div class="client">
                                                 <div class="client-avatar">
-                                                    J
+                                                    @if ($mensagem->tipo == 'user')
+                                                        C
+                                                    @else 
+                                                        B 
+                                                    @endif
                                                 </div>
 
                                                 <span>
-                                                    João Silva
+                                                    @if ($mensagem->tipo == 'user')
+                                                        Cliente
+                                                    @else 
+                                                        Bot 
+                                                    @endif
                                                 </span>
                                             </div>
-                                        </td> --}}
+                                        </td>
                                         <td>
                                             {{$mensagem->mensagem}}
                                         </td>

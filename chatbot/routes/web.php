@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function(){
         Route::resource('/empresa', EmpresaController::class)->middleware(AdminMiddleware::class);
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('/bots', BotController::class);
+        Route::resource('/usuario', UserController::class);
         Route::resource('/documento', DocumentoController::class);
         Route::post('/bots/instalar-no-site/list', [DashboardController::class, 'listBots']);
 
