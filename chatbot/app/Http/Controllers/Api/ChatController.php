@@ -10,6 +10,8 @@ use App\Models\ChatSession;
 use App\Models\Embedding;
 use App\Models\Conversa;
 use App\Models\Mensagem;
+use App\Models\Uso;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use OpenAI;
 
@@ -40,6 +42,8 @@ class ChatController extends Controller
             'input' => $request->message
         ]);
         
+        Log::alert("Total tokens embedding: ".$response->usage->totalTokens);
+
         $embeddingPergunta = $response->embeddings[0]->embedding;
 
         $rows = Embedding::select('embedding', 'chunk')
@@ -80,7 +84,17 @@ class ChatController extends Controller
             ]
         ]);
 
-        Log::alert('Resposta IA: '.$response->choices[0]->message->content);
+        $entrada = $response->usage->promptTokens;
+        $saida   = $response->usage->completionTokens;
+        $total   = $response->usage->totalTokens;
+
+        $uso = new Uso();
+        $uso->empresa_id = $chatSession->empresa_id;
+        $uso->tokens_usados = $total;
+        $uso->tokens_entrada = $entrada;
+        $uso->tokens_saida = $saida;
+        $uso->data = Carbon::today()->format('Y-m-d');
+        $uso->save();
 
         // Salva mensagem da resposta IA
         $mensagem = new Mensagem();
