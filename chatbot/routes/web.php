@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BotController;
+use App\Http\Controllers\CadastroController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\EmpresaController;
@@ -17,7 +18,7 @@ Route::middleware('auth')->group(function(){
         Route::resource('/empresa', EmpresaController::class)->middleware(AdminMiddleware::class);
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('/bots', BotController::class);
-        Route::resource('/usuario', UserController::class);
+        // Route::resource('/usuario', UserController::class);
         Route::resource('/documento', DocumentoController::class);
         Route::post('/bots/instalar-no-site/list', [DashboardController::class, 'listBots']);
 
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function(){
     
 Route::resource('/usuario', UserController::class);
 Route::get('/cadastre-se'  , [HomeController::class, 'create'])->name('cadastrese');
+Route::get('/cadastro'        , [CadastroController::class, 'planos'])->name('cadastro.planos');
+Route::post('/cadastro/plano' , [CadastroController::class, 'selecionarPlano'])->name('cadastro.plano');
 
 Route::get('/login'  , [LoginController::class, 'index'])->name('login');
 Route::post('/login' , [LoginController::class, 'login'])->name('loginPost');

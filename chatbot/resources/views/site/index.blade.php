@@ -11,7 +11,7 @@
             </p>
 
             <div class="mt-4">
-                <a href="{{route('cadastrese')}}" class="btn btn-main btn-lg">Começar Agora</a>
+                <a href="{{route('cadastro.planos')}}" class="btn btn-main btn-lg">Começar Agora</a>
             </div>
         </div>
     </section>
@@ -82,7 +82,7 @@
     <section class="section text-center">
         <div class="container">
             <h2>Pronto para automatizar seu atendimento?</h2>
-            <a href="{{route('cadastrese')}}" class="btn btn-main btn-lg mt-3">Começar agora</a>
+            <a href="{{route('cadastro.planos')}}" class="btn btn-main btn-lg mt-3">Começar agora</a>
         </div>
     </section>
 
