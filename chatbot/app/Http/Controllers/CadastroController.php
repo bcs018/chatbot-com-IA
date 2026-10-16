@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\UsuarioRequest;
 use App\Models\Plano;
 
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ class CadastroController extends Controller
 
     public function planos()
     {
-        $planoGratuito = Plano::where('nome', 'Free')->firstOrFail();
+        $planoGratuito = Plano::where('nome', 'Gratuito')->firstOrFail();
         $planoMax      = Plano::where('nome', 'Max')->firstOrFail();
         $planoGolden   = Plano::where('nome', 'Golden')->firstOrFail();
 
@@ -38,10 +40,19 @@ class CadastroController extends Controller
         return redirect()->route('cadastro.dados');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function dados()
+    {
+        $plano = Plano::findOrFail(session('cadastro.plano_id'));
 
+        return view('cadastro.dados', compact('plano'));
+    }
+
+    public function salvarDados(UsuarioRequest $request)
+    {
+        $request->session()->put('cadastro.dados', $request->all());
+
+        dd(session('cadastro.plano_id'));
+    }
 
     /**
      * Store a newly created resource in storage.

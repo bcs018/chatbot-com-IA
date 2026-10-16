@@ -29,6 +29,8 @@ Route::resource('/usuario', UserController::class);
 Route::get('/cadastre-se'  , [HomeController::class, 'create'])->name('cadastrese');
 Route::get('/cadastro'        , [CadastroController::class, 'planos'])->name('cadastro.planos');
 Route::post('/cadastro/plano' , [CadastroController::class, 'selecionarPlano'])->name('cadastro.plano');
+Route::get('/cadastro/dados'  , [CadastroController::class, 'dados'])->name('cadastro.dados');
+Route::post('/cadastro/dados'  , [CadastroController::class, 'salvarDados'])->name('cadastro.salvarDados');
 
 Route::get('/login'  , [LoginController::class, 'index'])->name('login');
 Route::post('/login' , [LoginController::class, 'login'])->name('loginPost');

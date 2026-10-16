@@ -28,6 +28,7 @@ class UsuarioRequest extends FormRequest
             'name'     => ['required'],
             'email'    => ['required', 'email', 'unique:users'],
             'password' => ['required', 'min:8', 'confirmed'],
+            'celular'  => ['required', 'regex:/^\(?[1-9]{2}\)?\s?9\d{4}-?\d{4}$/',],
         ];
     }
 
@@ -43,6 +44,8 @@ class UsuarioRequest extends FormRequest
             'password.required'  => 'Campo Senha é obrigatório',
             'password.min'       => 'Campo Senha deve conter no mínimo :min caracteres',
             'password.confirmed' => 'Campo Senha e Confirmar Senha não batem',
+            'celular.required'   => 'Campo Celular é obrigatório',
+            'celular.regex'      => 'Formato do celular não compativel com o padrão esperado',
         ];
     }
 }

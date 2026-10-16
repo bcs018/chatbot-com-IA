@@ -3,9 +3,11 @@
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card p-4">
 
-                <h3 class="text-center mb-4 text-light">🚀 Criar Conta</h3>
+                <h3 class="text-center mb-4 text-light">🚀 Dados pessoais</h3>
 
-                <form method="POST" action="{{route('usuario.store')}}">
+                <h5 class="text-center mb-4 text-light">Plano escolhido {{$plano->nome}} - R$ {{ number_format($plano->preco, 2, ',', '.') }} / mês</h5>
+
+                <form method="POST" action="{{route('cadastro.salvarDados')}}">
                     @csrf
 
                     <div class="mb-3">
@@ -36,6 +38,17 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label text-light">Celular</label>
+                        <input type="text" 
+                            name="celular" 
+                            id="celular"
+                            class="form-control {{$errors->has('celular') ? 'is-invalid' : ''}}" 
+                            placeholder="(00) 00000-0000" 
+                            value="{{old('celular')}}"
+                            maxlength="15">
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label text-light">Senha</label>
                         <input type="password" 
                             name="password" 
@@ -52,7 +65,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-main w-100 mt-4">
-                        Criar Conta
+                        Continuar
                     </button>
                 </form>
                 

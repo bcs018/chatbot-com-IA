@@ -15,7 +15,7 @@ class PlanoSeeder extends Seeder
     {
         $planos = [
             [
-                'nome' => 'Free',
+                'nome' => 'Gratuito',
                 'preco' => 0,
                 'tokens_mensais' => 10000
             ],
