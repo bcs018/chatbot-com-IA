@@ -5,7 +5,7 @@
 
                 <h3 class="text-center mb-4 text-light">🚀 Dados pessoais</h3>
 
-                <h5 class="text-center mb-4 text-light">Plano escolhido {{$plano->nome}} - R$ {{ number_format($plano->preco, 2, ',', '.') }} / mês</h5>
+                <h5 class="text-center mb-4 text-light">✅ Plano escolhido {{$plano->nome}} - R$ {{ number_format($plano->preco, 2, ',', '.') }} / mês</h5>
 
                 <form method="POST" action="{{route('cadastro.salvarDados')}}">
                     @csrf

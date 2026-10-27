@@ -16,7 +16,7 @@ class AssinaturaSeeder extends Seeder
      */
     public function run(): void
     {
-        $planoFree = Plano::where('nome', 'Free')->firstOrFail();
+        $planoFree = Plano::where('nome', 'Gratuito')->firstOrFail();
 
         Empresa::query()->each(function ($empresa) use ($planoFree) {
             Assinatura::firstOrCreate(

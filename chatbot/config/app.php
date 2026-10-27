@@ -4,6 +4,13 @@ return [
 
     'api_openai' => env('API_OPENAI'),
 
+    'api_asaas_sandbox'      => env('API_ASAAS_SANDBOX'),
+    'api_asaas_prod'         => env('API_ASAAS_PROD'),
+    'endpoint_asaas_sandbox' => env('ENDPOINT_ASAAS_SANDBOX'),
+    'endpoint_asaas_prod'    => env('ENDPOINT_ASAAS_PROD'),
+    'ambi_asaas'             => env('AMBI_ASSAS'),
+    
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -15,7 +22,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'InteliChat'),
 
     /*
     |--------------------------------------------------------------------------

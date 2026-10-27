@@ -21,7 +21,7 @@
                         <button class="btn btn-outline-secondary" type="submit">Login</button>
                     </div>
                     <div class="mt-3 d-grid gap-2">
-                        <a class="btn bg-main-buttom" href="{{ route('cadastrese') }}">Cadastre-se</a>
+                        <a class="btn bg-main-buttom" href="{{route('cadastro.planos')}}">Cadastre-se</a>
                     </div>
                     <div class="mt-4 text-center">
                         <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
